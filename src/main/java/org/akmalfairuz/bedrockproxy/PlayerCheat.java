@@ -17,6 +17,14 @@ public class PlayerCheat {
 
     @Getter
     @Setter
+    private boolean nightvision = false;
+
+    @Getter
+    @Setter
+    private boolean fly = false;
+
+    @Getter
+    @Setter
     private boolean fakeLag = false;
 
     @Getter
