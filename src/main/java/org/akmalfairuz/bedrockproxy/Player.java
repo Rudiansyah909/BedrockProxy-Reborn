@@ -21,6 +21,12 @@ import org.akmalfairuz.bedrockproxy.server.ClientBatchHandler;
 import org.akmalfairuz.bedrockproxy.server.ServerBatchHandler;
 import org.akmalfairuz.bedrockproxy.server.ServerHandler;
 import org.akmalfairuz.bedrockproxy.utils.Log;
+import com.nukkitx.protocol.bedrock.data.AdventureSetting;
+import com.nukkitx.protocol.bedrock.data.command.CommandPermission;
+import com.nukkitx.protocol.bedrock.data.PlayerPermission;
+import com.nukkitx.protocol.bedrock.packet.AdventureSettingsPacket;
+import com.nukkitx.protocol.bedrock.packet.MobEffectPacket;
+
 
 import java.net.InetSocketAddress;
 import java.security.interfaces.ECPrivateKey;
