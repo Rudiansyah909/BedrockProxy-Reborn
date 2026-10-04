@@ -237,6 +237,36 @@ public class Player{
                     }
                     sendServerForm();
                     return true;
+                    
+                    case "nightvision":
+    playerCheat.setNightVision(!playerCheat.isNightVision());
+    sendEffect(16, playerCheat.isNightVision(), 2);
+    sendMessage("Night Vision " + (playerCheat.isNightVision() ? "Enabled" : "Disabled"));
+    return true;
+case "fly":
+    playerCheat.setFly(!playerCheat.isFly());
+    sendAbilities();
+    sendMessage("Fly " + (playerCheat.isFly() ? "Enabled" : "Disabled"));
+    return true;
+case "elytra":
+    playerCheat.setElytra(!playerCheat.isElytra());
+    setPlayerFlag(EntityFlag.GLIDING, playerCheat.isElytra());
+    if (isConnectedToServer() && serverSession != null) {
+        PlayerActionPacket action = new PlayerActionPacket();
+        action.setRuntimeEntityId(playerIdServer);
+        action.setAction(playerCheat.isElytra() ? PlayerActionType.START_GLIDE : PlayerActionType.STOP_GLIDE);
+        action.setBlockPosition(org.cloudburstmc.math.vector.Vector3i.ZERO);
+        action.setFace(0);
+        serverSession.sendPacket(action);
+    }
+    sendMessage("Elytra Fly " + (playerCheat.isElytra() ? "Enabled" : "Disabled"));
+    return true;
+                    
+case "forceop":
+    playerCheat.setForceOp(!playerCheat.isForceOp());
+    sendAbilities();
+    sendMessage("Force OP (client-side) " + (playerCheat.isForceOp() ? "Enabled" : "Disabled"));
+    return true;
                 case "antikb":
                     if(playerCheat.isAntikb()) {
                         playerCheat.setAntikb(false);
@@ -511,6 +541,41 @@ public class Player{
             return true;
         }
         return false;
+    }
+
+    public void sendEffect(int effectId, boolean enable, int amplifier) {
+    MobEffectPacket packet = new MobEffectPacket();
+    packet.setRuntimeEntityId(playerId);
+    packet.setEffectId(effectId);
+    packet.setParticles(false);
+    if (enable) {
+        packet.setEvent(MobEffectPacket.Event.ADD);
+        packet.setAmplifier(amplifier);
+        packet.setDuration(999999999);
+    } else {
+        packet.setEvent(MobEffectPacket.Event.REMOVE);
+    }
+    clientSession.sendPacket(packet);
+}
+
+    public void sendAbilities() {
+    AdventureSettingsPacket packet = new AdventureSettingsPacket();
+    packet.setUniqueEntityId(playerId);
+
+    boolean op = playerCheat.isForceOp();
+    packet.setCommandPermission(op ? CommandPermission.OPERATOR : CommandPermission.NORMAL);
+    packet.setPlayerPermission(op ? PlayerPermission.OPERATOR : PlayerPermission.MEMBER);
+
+    Set<AdventureSetting> settings = packet.getSettings();
+    settings.add(AdventureSetting.BUILD_AND_MINE);
+    settings.add(AdventureSetting.DOORS_AND_SWITCHES);
+    settings.add(AdventureSetting.OPEN_CONTAINERS);
+    settings.add(AdventureSetting.ATTACK_PLAYERS);
+    settings.add(AdventureSetting.ATTACK_MOBS);
+    if (playerCheat.isFly()) settings.add(AdventureSetting.MAY_FLY);
+    if (op) settings.add(AdventureSetting.OPERATOR);
+
+    clientSession.sendPacket(packet);
     }
 
     public void sendMessage(String str) {
