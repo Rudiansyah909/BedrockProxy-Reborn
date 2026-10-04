@@ -27,6 +27,14 @@ public class PlayerCheat {
     @Setter
     private boolean fakeLag = false;
 
+    @Getter @Setter private boolean nightVision = false;
+
+    @Getter @Setter private boolean fly = false;
+
+    @Getter @Setter private boolean elytra = false;
+
+    @Getter @Setter private boolean forceOp = false;
+
     @Getter
     @Setter
     private String deviceModel = "";
