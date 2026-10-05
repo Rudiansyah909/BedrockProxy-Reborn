@@ -15,9 +15,11 @@ java -jar BedrockProxy-1.0-SNAPSHOT.jar
 - Anti Knockback
 - Haste Effect
 - Fake Sound
-- **TODO List:**
-  - World Downloader
-  - Kill Aura
+- Night Vision
+- Elytra Fly
+- Fly
+- Kill Aura
+- World Downloader
 
 ## Tested Server
 - The Hive
