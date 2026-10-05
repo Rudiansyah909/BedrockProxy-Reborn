@@ -1,4 +1,4 @@
-# BedrockProxy
+# BedrockProxy Reborn
 A proxy hack utilities for Minecraft: Bedrock Edition
 <a href="https://github.com/AkmalFairuz/BedrockProxy/releases"><img src="https://img.shields.io/github/v/tag/AkmalFairuz/BedrockProxy?label=release&logo=github" alt="GitHub tag (latest semver)" /></a>
 
