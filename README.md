@@ -17,9 +17,13 @@ java -jar BedrockProxy-1.0-SNAPSHOT.jar
 - Fake Sound
 - Night Vision
 - Elytra Fly
+- Operator (Client-sided) 
 - Fly
 - Kill Aura
 - World Downloader
+
+## Supported Version
+Minecraft Bedrock 1.17
 
 ## Tested Server
 - The Hive
